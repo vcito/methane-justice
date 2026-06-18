@@ -1,0 +1,8 @@
+country,gdp_per_capita,latitude,longitude,ldc
+Nigeria,2200,9.0,8.0,Yes
+Brazil,8800,-10.0,-55.0,No
+India,2400,20.0,78.0,No
+USA,63000,37.0,-95.0,No
+Germany,47000,51.0,10.0,No
+China,11000,35.0,105.0,No
+Australia,51000,-25.0,133.0,No

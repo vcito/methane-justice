@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_a46dfee410f71d5f8a4d2f217fab50f3 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@main/folium/templates/leaflet_heat.min.js"></script>
+</head>
+<body>
+    
+    
+<div style="position: fixed; top: 10px; left: 50px; width: 350px; 
+            background-color: white; border:2px solid grey; z-index:9999; 
+            font-size:14px; padding:10px; border-radius:5px;">
+    <b>Methane Emissions & Climate Inequality</b><br>
+    🔴 Red dots = Least Developed Countries (LDC)<br>
+    🔥 Heat map = Methane hotspots (oil/gas, agriculture)<br>
+    <br>
+    <i>The countries most vulnerable to climate change<br>
+    didn't cause the emissions.</i>
+</div>
+    
+            <div class="folium-map" id="map_a46dfee410f71d5f8a4d2f217fab50f3" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_a46dfee410f71d5f8a4d2f217fab50f3 = L.map(
+                "map_a46dfee410f71d5f8a4d2f217fab50f3",
+                {
+                    center: [20.0, 0.0],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 2,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_f6ea65d1f61e9233ddaf6c660a56b656 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detectRetina": false, "maxNativeZoom": 19, "maxZoom": 19, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+        
+    
+            tile_layer_f6ea65d1f61e9233ddaf6c660a56b656.addTo(map_a46dfee410f71d5f8a4d2f217fab50f3);
+        
+    
+            var heat_map_9708fafb3f039c8b4aa9fe1ca165930d = L.heatLayer(
+                [[28.5, 47.5, 0.9], [28.0, 50.0, 0.85], [26.0, 49.0, 0.88], [-5.0, 20.0, 0.7], [4.0, 12.0, 0.75], [37.0, 38.0, 0.8], [15.0, 25.0, 0.65], [-15.0, 25.0, 0.7], [25.0, 78.0, 0.72], [-10.0, -60.0, 0.68], [52.0, 8.0, 0.55], [48.0, 2.0, 0.52], [40.0, -75.0, 0.58]],
+                {"blur": 25, "maxZoom": 2, "minOpacity": 0.3, "radius": 50}
+            );
+        
+    
+            heat_map_9708fafb3f039c8b4aa9fe1ca165930d.addTo(map_a46dfee410f71d5f8a4d2f217fab50f3);
+        
+    
+            var circle_marker_0d36253bbb2060d340461dfd54f73ecc = L.circleMarker(
+                [9.0, 8.0],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_a46dfee410f71d5f8a4d2f217fab50f3);
+        
+    
+        var popup_37c720b587b5fedee1c310f9c2886728 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_4766d10a781603661a1954b22bf4febc = $(`<div id="html_4766d10a781603661a1954b22bf4febc" style="width: 100.0%; height: 100.0%;"><b>Nigeria</b><br>GDP: $2,200<br>LDC Status: Yes</div>`)[0];
+                popup_37c720b587b5fedee1c310f9c2886728.setContent(html_4766d10a781603661a1954b22bf4febc);
+            
+        
+
+        circle_marker_0d36253bbb2060d340461dfd54f73ecc.bindPopup(popup_37c720b587b5fedee1c310f9c2886728)
+        ;
+
+        
+    
+    
+            var circle_marker_ac9ad80e1ff8e811eeee15c26fadb3c7 = L.circleMarker(
+                [17.6, 8.7],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_a46dfee410f71d5f8a4d2f217fab50f3);
+        
+    
+        var popup_c9fbe4d2dce801182920d3fce86ce3f5 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_2ac23eb65b1b436f46315337aeab4d35 = $(`<div id="html_2ac23eb65b1b436f46315337aeab4d35" style="width: 100.0%; height: 100.0%;"><b>Niger</b><br>GDP: $1,200<br>LDC Status: Yes</div>`)[0];
+                popup_c9fbe4d2dce801182920d3fce86ce3f5.setContent(html_2ac23eb65b1b436f46315337aeab4d35);
+            
+        
+
+        circle_marker_ac9ad80e1ff8e811eeee15c26fadb3c7.bindPopup(popup_c9fbe4d2dce801182920d3fce86ce3f5)
+        ;
+
+        
+    
+    
+            var circle_marker_51a215ae0122bc4dc2a6ba9e3eaa34db = L.circleMarker(
+                [15.5, 18.7],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_a46dfee410f71d5f8a4d2f217fab50f3);
+        
+    
+        var popup_3749c87c51e14c2c5e1747db23ae7ae2 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_ee33f9355fd9f0c137c0d20873628e5e = $(`<div id="html_ee33f9355fd9f0c137c0d20873628e5e" style="width: 100.0%; height: 100.0%;"><b>Chad</b><br>GDP: $1,300<br>LDC Status: Yes</div>`)[0];
+                popup_3749c87c51e14c2c5e1747db23ae7ae2.setContent(html_ee33f9355fd9f0c137c0d20873628e5e);
+            
+        
+
+        circle_marker_51a215ae0122bc4dc2a6ba9e3eaa34db.bindPopup(popup_3749c87c51e14c2c5e1747db23ae7ae2)
+        ;
+
+        
+    
+    
+            var circle_marker_4ae5471a8e4603f16c4fbc98bf32fd55 = L.circleMarker(
+                [-4.0, 21.0],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_a46dfee410f71d5f8a4d2f217fab50f3);
+        
+    
+        var popup_e31c749f547e2a943de2d54b90ee0ead = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_88a082a94de4a85edd693b3b39956140 = $(`<div id="html_88a082a94de4a85edd693b3b39956140" style="width: 100.0%; height: 100.0%;"><b>Democratic Congo</b><br>GDP: $2,400<br>LDC Status: Yes</div>`)[0];
+                popup_e31c749f547e2a943de2d54b90ee0ead.setContent(html_88a082a94de4a85edd693b3b39956140);
+            
+        
+
+        circle_marker_4ae5471a8e4603f16c4fbc98bf32fd55.bindPopup(popup_e31c749f547e2a943de2d54b90ee0ead)
+        ;
+
+        
+    
+    
+            var circle_marker_3a7f939dc11a88758ed25c67ac64c7ca = L.circleMarker(
+                [9.1, 40.5],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_a46dfee410f71d5f8a4d2f217fab50f3);
+        
+    
+        var popup_1674f07405f175e132599fb43479d213 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_9bc7fdf1dd98ee926a1f22c59d4edb9b = $(`<div id="html_9bc7fdf1dd98ee926a1f22c59d4edb9b" style="width: 100.0%; height: 100.0%;"><b>Ethiopia</b><br>GDP: $2,500<br>LDC Status: Yes</div>`)[0];
+                popup_1674f07405f175e132599fb43479d213.setContent(html_9bc7fdf1dd98ee926a1f22c59d4edb9b);
+            
+        
+
+        circle_marker_3a7f939dc11a88758ed25c67ac64c7ca.bindPopup(popup_1674f07405f175e132599fb43479d213)
+        ;
+
+        
+    
+    
+            var circle_marker_ae81b776ac3b43e8c09c71a3711393d3 = L.circleMarker(
+                [23.7, 90.4],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_a46dfee410f71d5f8a4d2f217fab50f3);
+        
+    
+        var popup_901817989ca76a6648ee6c7d413d9954 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_318b1c25321775648cad3f21b153001d = $(`<div id="html_318b1c25321775648cad3f21b153001d" style="width: 100.0%; height: 100.0%;"><b>Bangladesh</b><br>GDP: $7,600<br>LDC Status: Yes</div>`)[0];
+                popup_901817989ca76a6648ee6c7d413d9954.setContent(html_318b1c25321775648cad3f21b153001d);
+            
+        
+
+        circle_marker_ae81b776ac3b43e8c09c71a3711393d3.bindPopup(popup_901817989ca76a6648ee6c7d413d9954)
+        ;
+
+        
+    
+    
+            var layer_control_101edec90889eaa2b495d48d3ef294a0_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_f6ea65d1f61e9233ddaf6c660a56b656,
+                },
+                overlays :  {
+                    "macro_element_9708fafb3f039c8b4aa9fe1ca165930d" : heat_map_9708fafb3f039c8b4aa9fe1ca165930d,
+                },
+            };
+            let layer_control_101edec90889eaa2b495d48d3ef294a0 = L.control.layers(
+                layer_control_101edec90889eaa2b495d48d3ef294a0_layers.base_layers,
+                layer_control_101edec90889eaa2b495d48d3ef294a0_layers.overlays,
+                {"autoZIndex": true, "collapsed": true, "position": "topright"}
+            ).addTo(map_a46dfee410f71d5f8a4d2f217fab50f3);
+
+        
+</script>
+</html>
