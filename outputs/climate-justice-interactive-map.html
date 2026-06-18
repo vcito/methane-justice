@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_9815ed59460f8becd09b80fb1c6be3b4 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="position: fixed; bottom: 50px; left: 50px; width: 320px; 
+background-color: white; border:2px solid grey; z-index:9999; 
+font-size:12px; padding:15px; border-radius:5px; line-height: 1.5;">
+
+<b style="font-size: 14px;">Climate Justice Map</b><br>
+<b>Methane Emissions vs Climate Vulnerability</b><br>
+<br>
+
+<b>Circle Size = Emissions (log scale)</b><br>
+Bigger circles = more methane emitted<br>
+<br>
+
+<b>Circle Color = Vulnerability</b><br>
+<span style="color:red;">●</span> Red (>60) = Highly vulnerable<br>
+<span style="color:orange;">●</span> Orange (50-60) = Very vulnerable<br>
+<span style="color:yellow;">●</span> Yellow (40-50) = Moderately vulnerable<br>
+<span style="color:green;">●</span> Green (<40) = Low vulnerability<br>
+<br>
+
+<b>The Story:</b><br>
+🔴 <b>RED + BIG</b> = Victims (high emissions nearby, vulnerable)<br>
+🟢 <b>GREEN + BIG</b> = Free Riders (high emissions, safe)<br>
+<br>
+
+<i>Hover over circles for details</i>
+</div>
+    
+            <div class="folium-map" id="map_9815ed59460f8becd09b80fb1c6be3b4" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_9815ed59460f8becd09b80fb1c6be3b4 = L.map(
+                "map_9815ed59460f8becd09b80fb1c6be3b4",
+                {
+                    center: [20.0, 0.0],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 2,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_b035cd71950aae284bcf21b9704c4473 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detectRetina": false, "maxNativeZoom": 19, "maxZoom": 19, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+        
+    
+            tile_layer_b035cd71950aae284bcf21b9704c4473.addTo(map_9815ed59460f8becd09b80fb1c6be3b4);
+        
+    
+            var circle_marker_d3500ef09932493c043e7d5bdaf7866d = L.circleMarker(
+                [35.8617, 104.1954],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 34.09561833398267, "stroke": true, "weight": 2}
+            ).addTo(map_9815ed59460f8becd09b80fb1c6be3b4);
+        
+    
+        var popup_2165a45225d3c090aa6a3a6979117545 = L.popup({"maxWidth": 250});
+
+        
+            
+                var html_24d8cde0e99fc48319f683fb5f1468a4 = $(`<div id="html_24d8cde0e99fc48319f683fb5f1468a4" style="width: 100.0%; height: 100.0%;">     <b>China</b><br>     Emissions: 65,936 Gg CH4/year<br>     Vulnerability: 53.9/100<br>     <br>     <i>Circle size = emissions (log scale)<br>     Circle color = vulnerability</i>     </div>`)[0];
+                popup_2165a45225d3c090aa6a3a6979117545.setContent(html_24d8cde0e99fc48319f683fb5f1468a4);
+            
+        
+
+        circle_marker_d3500ef09932493c043e7d5bdaf7866d.bindPopup(popup_2165a45225d3c090aa6a3a6979117545)
+        ;
+
+        
+    
+    
+            var circle_marker_636044e9a7720b4d46712eacbb880fe8 = L.circleMarker(
+                [20.5937, 78.9629],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 32.43837094496222, "stroke": true, "weight": 2}
+            ).addTo(map_9815ed59460f8becd09b80fb1c6be3b4);
+        
+    
+        var popup_17cb88cd46355e28cb0ccb164c39c57a = L.popup({"maxWidth": 250});
+
+        
+            
+                var html_38aa20db569df5669d1a30805ed9e6cc = $(`<div id="html_38aa20db569df5669d1a30805ed9e6cc" style="width: 100.0%; height: 100.0%;">     <b>India</b><br>     Emissions: 30,738 Gg CH4/year<br>     Vulnerability: 42.6/100<br>     <br>     <i>Circle size = emissions (log scale)<br>     Circle color = vulnerability</i>     </div>`)[0];
+                popup_17cb88cd46355e28cb0ccb164c39c57a.setContent(html_38aa20db569df5669d1a30805ed9e6cc);
+            
+        
+
+        circle_marker_636044e9a7720b4d46712eacbb880fe8.bindPopup(popup_17cb88cd46355e28cb0ccb164c39c57a)
+        ;
+
+        
+    
+    
+            var circle_marker_ee4a353d87c9f9b8f8883c115435eae2 = L.circleMarker(
+                [37.0902, -95.7129],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 32.03463279772147, "stroke": true, "weight": 2}
+            ).addTo(map_9815ed59460f8becd09b80fb1c6be3b4);
+        
+    
+        var popup_3240e0485a0d8c56b7388281e17679b4 = L.popup({"maxWidth": 250});
+
+        
+            
+                var html_f5910655ea05977d6084b3b8f44536e9 = $(`<div id="html_f5910655ea05977d6084b3b8f44536e9" style="width: 100.0%; height: 100.0%;">     <b>United States</b><br>     Emissions: 25,523 Gg CH4/year<br>     Vulnerability: 67.8/100<br>     <br>     <i>Circle size = emissions (log scale)<br>     Circle color = vulnerability</i>     </div>`)[0];
+                popup_3240e0485a0d8c56b7388281e17679b4.setContent(html_f5910655ea05977d6084b3b8f44536e9);
+            
+        
+
+        circle_marker_ee4a353d87c9f9b8f8883c115435eae2.bindPopup(popup_3240e0485a0d8c56b7388281e17679b4)
+        ;
+
+        
+    
+    
+            var circle_marker_a532a8c87f7977db0eee6914543e5baa = L.circleMarker(
+                [-14.235, -51.9253],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 31.786961680858802, "stroke": true, "weight": 2}
+            ).addTo(map_9815ed59460f8becd09b80fb1c6be3b4);
+        
+    
+        var popup_0fe47efa9b729c2009355876ed43f563 = L.popup({"maxWidth": 250});
+
+        
+            
+                var html_ff108479897e4eb7a7ca5053dceb62d3 = $(`<div id="html_ff108479897e4eb7a7ca5053dceb62d3" style="width: 100.0%; height: 100.0%;">     <b>Brazil</b><br>     Emissions: 22,772 Gg CH4/year<br>     Vulnerability: 48.7/100<br>     <br>     <i>Circle size = emissions (log scale)<br>     Circle color = vulnerability</i>     </div>`)[0];
+                popup_0fe47efa9b729c2009355876ed43f563.setContent(html_ff108479897e4eb7a7ca5053dceb62d3);
+            
+        
+
+        circle_marker_a532a8c87f7977db0eee6914543e5baa.bindPopup(popup_0fe47efa9b729c2009355876ed43f563)
+        ;
+
+        
+    
+    
+            var circle_marker_d80eadf233320a0b247076b47204472d = L.circleMarker(
+                [61.524, 105.3188],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 31.07259155524765, "stroke": true, "weight": 2}
+            ).addTo(map_9815ed59460f8becd09b80fb1c6be3b4);
+        
+    
+        var popup_1be2bb44d44e07eee4fbe175262c2f46 = L.popup({"maxWidth": 250});
+
+        
+            
+                var html_22180f7f1a78d30dbaa2e564ddc119b6 = $(`<div id="html_22180f7f1a78d30dbaa2e564ddc119b6" style="width: 100.0%; height: 100.0%;">     <b>Russian Federation</b><br>     Emissions: 16,388 Gg CH4/year<br>     Vulnerability: 60.5/100<br>     <br>     <i>Circle size = emissions (log scale)<br>     Circle color = vulnerability</i>     </div>`)[0];
+                popup_1be2bb44d44e07eee4fbe175262c2f46.setContent(html_22180f7f1a78d30dbaa2e564ddc119b6);
+            
+        
+
+        circle_marker_d80eadf233320a0b247076b47204472d.bindPopup(popup_1be2bb44d44e07eee4fbe175262c2f46)
+        ;
+
+        
+    
+    
+            var circle_marker_ca60c333c53dc8ff6663e25be30cae46 = L.circleMarker(
+                [-0.7893, 113.9213],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 30.837336129420983, "stroke": true, "weight": 2}
+            ).addTo(map_9815ed59460f8becd09b80fb1c6be3b4);
+        
+    
+        var popup_e419f195e407e231f699d1b0c4d14faa = L.popup({"maxWidth": 250});
+
+        
+            
+                var html_34f853131c1f485b191e571641295211 = $(`<div id="html_34f853131c1f485b191e571641295211" style="width: 100.0%; height: 100.0%;">     <b>Indonesia</b><br>     Emissions: 14,705 Gg CH4/year<br>     Vulnerability: 45.9/100<br>     <br>     <i>Circle size = emissions (log scale)<br>     Circle color = vulnerability</i>     </div>`)[0];
+                popup_e419f195e407e231f699d1b0c4d14faa.setContent(html_34f853131c1f485b191e571641295211);
+            
+        
+
+        circle_marker_ca60c333c53dc8ff6663e25be30cae46.bindPopup(popup_e419f195e407e231f699d1b0c4d14faa)
+        ;
+
+        
+    
+    
+            var circle_marker_9b44e564233b85a2b0ce6e298a68f53d = L.circleMarker(
+                [30.3753, 69.3451],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 29.68759638144747, "stroke": true, "weight": 2}
+            ).addTo(map_9815ed59460f8becd09b80fb1c6be3b4);
+        
+    
+        var popup_ae782163bbdcac747ace50fa1482adbb = L.popup({"maxWidth": 250});
+
+        
+            
+                var html_507885039751ac345399ceaffefed9c1 = $(`<div id="html_507885039751ac345399ceaffefed9c1" style="width: 100.0%; height: 100.0%;">     <b>Pakistan</b><br>     Emissions: 8,660 Gg CH4/year<br>     Vulnerability: 38.1/100<br>     <br>     <i>Circle size = emissions (log scale)<br>     Circle color = vulnerability</i>     </div>`)[0];
+                popup_ae782163bbdcac747ace50fa1482adbb.setContent(html_507885039751ac345399ceaffefed9c1);
+            
+        
+
+        circle_marker_9b44e564233b85a2b0ce6e298a68f53d.bindPopup(popup_ae782163bbdcac747ace50fa1482adbb)
+        ;
+
+        
+    
+    
+            var circle_marker_7396eee2325ec881d3e7d6bc0152f2da = L.circleMarker(
+                [9.082, 8.6753],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 29.68721699355532, "stroke": true, "weight": 2}
+            ).addTo(map_9815ed59460f8becd09b80fb1c6be3b4);
+        
+    
+        var popup_cfe6f875a7d6a7f241df5b271c5f9492 = L.popup({"maxWidth": 250});
+
+        
+            
+                var html_bbde347d45765fb76cae84c53cbab6e6 = $(`<div id="html_bbde347d45765fb76cae84c53cbab6e6" style="width: 100.0%; height: 100.0%;">     <b>Nigeria</b><br>     Emissions: 8,659 Gg CH4/year<br>     Vulnerability: 37.5/100<br>     <br>     <i>Circle size = emissions (log scale)<br>     Circle color = vulnerability</i>     </div>`)[0];
+                popup_cfe6f875a7d6a7f241df5b271c5f9492.setContent(html_bbde347d45765fb76cae84c53cbab6e6);
+            
+        
+
+        circle_marker_7396eee2325ec881d3e7d6bc0152f2da.bindPopup(popup_cfe6f875a7d6a7f241df5b271c5f9492)
+        ;
+
+        
+    
+    
+            var circle_marker_c3103913974abc206811dd478a133889 = L.circleMarker(
+                [32.4279, 53.688],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 29.659789419709877, "stroke": true, "weight": 2}
+            ).addTo(map_9815ed59460f8becd09b80fb1c6be3b4);
+        
+    
+        var popup_c37dbe06d72ab117d3ed1aeb873700fd = L.popup({"maxWidth": 250});
+
+        
+            
+                var html_e67a69ebe85a30b430e5c336496f59fa = $(`<div id="html_e67a69ebe85a30b430e5c336496f59fa" style="width: 100.0%; height: 100.0%;">     <b>Iran, Islamic Republic of</b><br>     Emissions: 8,550 Gg CH4/year<br>     Vulnerability: 51.1/100<br>     <br>     <i>Circle size = emissions (log scale)<br>     Circle color = vulnerability</i>     </div>`)[0];
+                popup_c37dbe06d72ab117d3ed1aeb873700fd.setContent(html_e67a69ebe85a30b430e5c336496f59fa);
+            
+        
+
+        circle_marker_c3103913974abc206811dd478a133889.bindPopup(popup_c37dbe06d72ab117d3ed1aeb873700fd)
+        ;
+
+        
+    
+    
+            var circle_marker_eeab2fe77ad60ad17f4f978d9de5ad92 = L.circleMarker(
+                [23.6345, -102.5528],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 29.103043027020384, "stroke": true, "weight": 2}
+            ).addTo(map_9815ed59460f8becd09b80fb1c6be3b4);
+        
+    
+        var popup_84d683b16ff827c3aae3d573a5cb537e = L.popup({"maxWidth": 250});
+
+        
+            
+                var html_9818e3e2348a2999ab4f5843aa4bd213 = $(`<div id="html_9818e3e2348a2999ab4f5843aa4bd213" style="width: 100.0%; height: 100.0%;">     <b>Mexico</b><br>     Emissions: 6,616 Gg CH4/year<br>     Vulnerability: 49.2/100<br>     <br>     <i>Circle size = emissions (log scale)<br>     Circle color = vulnerability</i>     </div>`)[0];
+                popup_84d683b16ff827c3aae3d573a5cb537e.setContent(html_9818e3e2348a2999ab4f5843aa4bd213);
+            
+        
+
+        circle_marker_eeab2fe77ad60ad17f4f978d9de5ad92.bindPopup(popup_84d683b16ff827c3aae3d573a5cb537e)
+        ;
+
+        
+    
+    
+            var circle_marker_83749a452fbdb1e9e15606e98b41d5db = L.circleMarker(
+                [33.2232, 43.6793],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 28.817306807481305, "stroke": true, "weight": 2}
+            ).addTo(map_9815ed59460f8becd09b80fb1c6be3b4);
+        
+    
+        var popup_2b1f76db6b90bff68772e58344ea1418 = L.popup({"maxWidth": 250});
+
+        
+            
+                var html_7351d8f19d9c72b1a516e6753f13fb98 = $(`<div id="html_7351d8f19d9c72b1a516e6753f13fb98" style="width: 100.0%; height: 100.0%;">     <b>Iraq</b><br>     Emissions: 5,800 Gg CH4/year<br>     Vulnerability: 43.2/100<br>     <br>     <i>Circle size = emissions (log scale)<br>     Circle color = vulnerability</i>     </div>`)[0];
+                popup_2b1f76db6b90bff68772e58344ea1418.setContent(html_7351d8f19d9c72b1a516e6753f13fb98);
+            
+        
+
+        circle_marker_83749a452fbdb1e9e15606e98b41d5db.bindPopup(popup_2b1f76db6b90bff68772e58344ea1418)
+        ;
+
+        
+    
+    
+            var circle_marker_e0f7aad3c17e8b151bb0bb03517235ed = L.circleMarker(
+                [23.685, 90.3563],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 28.57650050913363, "stroke": true, "weight": 2}
+            ).addTo(map_9815ed59460f8becd09b80fb1c6be3b4);
+        
+    
+        var popup_f41334daad14e1bcea0df644a792e3c8 = L.popup({"maxWidth": 250});
+
+        
+            
+                var html_620f07ec63568370a81e858ccd536d51 = $(`<div id="html_620f07ec63568370a81e858ccd536d51" style="width: 100.0%; height: 100.0%;">     <b>Bangladesh</b><br>     Emissions: 5,192 Gg CH4/year<br>     Vulnerability: 37.1/100<br>     <br>     <i>Circle size = emissions (log scale)<br>     Circle color = vulnerability</i>     </div>`)[0];
+                popup_f41334daad14e1bcea0df644a792e3c8.setContent(html_620f07ec63568370a81e858ccd536d51);
+            
+        
+
+        circle_marker_e0f7aad3c17e8b151bb0bb03517235ed.bindPopup(popup_f41334daad14e1bcea0df644a792e3c8)
+        ;
+
+        
+    
+    
+            var circle_marker_7169af46edac82d594a4940eb1a4b880 = L.circleMarker(
+                [-38.4161, -63.6167],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 28.57544105781063, "stroke": true, "weight": 2}
+            ).addTo(map_9815ed59460f8becd09b80fb1c6be3b4);
+        
+    
+        var popup_40cbe8adf55f373485fc93ba1b637aa5 = L.popup({"maxWidth": 250});
+
+        
+            
+                var html_8e96e9a1c8839f20bc86bd4f89acdfe2 = $(`<div id="html_8e96e9a1c8839f20bc86bd4f89acdfe2" style="width: 100.0%; height: 100.0%;">     <b>Argentina</b><br>     Emissions: 5,189 Gg CH4/year<br>     Vulnerability: 49.5/100<br>     <br>     <i>Circle size = emissions (log scale)<br>     Circle color = vulnerability</i>     </div>`)[0];
+                popup_40cbe8adf55f373485fc93ba1b637aa5.setContent(html_8e96e9a1c8839f20bc86bd4f89acdfe2);
+            
+        
+
+        circle_marker_7169af46edac82d594a4940eb1a4b880.bindPopup(popup_40cbe8adf55f373485fc93ba1b637aa5)
+        ;
+
+        
+    
+    
+            var circle_marker_35f8e5e12c7b121c0e2b68e9195853fb = L.circleMarker(
+                [-25.2744, 133.7751],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 28.294001174042652, "stroke": true, "weight": 2}
+            ).addTo(map_9815ed59460f8becd09b80fb1c6be3b4);
+        
+    
+        var popup_f64bc296f53041d3eb3e4f5e897c42d5 = L.popup({"maxWidth": 250});
+
+        
+            
+                var html_36ab9d574c2f58f26c2bc5038873fb6a = $(`<div id="html_36ab9d574c2f58f26c2bc5038873fb6a" style="width: 100.0%; height: 100.0%;">     <b>Australia</b><br>     Emissions: 4,558 Gg CH4/year<br>     Vulnerability: 69.0/100<br>     <br>     <i>Circle size = emissions (log scale)<br>     Circle color = vulnerability</i>     </div>`)[0];
+                popup_f64bc296f53041d3eb3e4f5e897c42d5.setContent(html_36ab9d574c2f58f26c2bc5038873fb6a);
+            
+        
+
+        circle_marker_35f8e5e12c7b121c0e2b68e9195853fb.bindPopup(popup_f64bc296f53041d3eb3e4f5e897c42d5)
+        ;
+
+        
+    
+    
+            var circle_marker_59c071df0fac0013647cef993ea4baa3 = L.circleMarker(
+                [15.87, 100.9925],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 28.271148763589352, "stroke": true, "weight": 2}
+            ).addTo(map_9815ed59460f8becd09b80fb1c6be3b4);
+        
+    
+        var popup_7ce0f21b8173fdd7878b749cfafbdc01 = L.popup({"maxWidth": 250});
+
+        
+            
+                var html_bb4b5fc5d27b2eb8f14bdda8e4f14535 = $(`<div id="html_bb4b5fc5d27b2eb8f14bdda8e4f14535" style="width: 100.0%; height: 100.0%;">     <b>Thailand</b><br>     Emissions: 4,511 Gg CH4/year<br>     Vulnerability: 50.9/100<br>     <br>     <i>Circle size = emissions (log scale)<br>     Circle color = vulnerability</i>     </div>`)[0];
+                popup_7ce0f21b8173fdd7878b749cfafbdc01.setContent(html_bb4b5fc5d27b2eb8f14bdda8e4f14535);
+            
+        
+
+        circle_marker_59c071df0fac0013647cef993ea4baa3.bindPopup(popup_7ce0f21b8173fdd7878b749cfafbdc01)
+        ;
+
+        
+    
+    
+            var circle_marker_838f26742a19975ade45025cac042f93 = L.circleMarker(
+                [14.0583, 108.2772],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 28.26167551077045, "stroke": true, "weight": 2}
+            ).addTo(map_9815ed59460f8becd09b80fb1c6be3b4);
+        
+    
+        var popup_a037e9d4f38c3a67ee47686eb0cd00a7 = L.popup({"maxWidth": 250});
+
+        
+            
+                var html_788fafa2eb2a087f46f80da3b38a6444 = $(`<div id="html_788fafa2eb2a087f46f80da3b38a6444" style="width: 100.0%; height: 100.0%;">     <b>Viet Nam</b><br>     Emissions: 4,491 Gg CH4/year<br>     Vulnerability: 46.9/100<br>     <br>     <i>Circle size = emissions (log scale)<br>     Circle color = vulnerability</i>     </div>`)[0];
+                popup_a037e9d4f38c3a67ee47686eb0cd00a7.setContent(html_788fafa2eb2a087f46f80da3b38a6444);
+            
+        
+
+        circle_marker_838f26742a19975ade45025cac042f93.bindPopup(popup_a037e9d4f38c3a67ee47686eb0cd00a7)
+        ;
+
+        
+    
+    
+            var circle_marker_22ad8a1cf595cda888fc99d3a268ef90 = L.circleMarker(
+                [56.1304, -106.3468],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 28.237697987816016, "stroke": true, "weight": 2}
+            ).addTo(map_9815ed59460f8becd09b80fb1c6be3b4);
+        
+    
+        var popup_4781e1bf0f1fe29cba50391dba30fd80 = L.popup({"maxWidth": 250});
+
+        
+            
+                var html_f421230f491a555f4b2226b45b5fa336 = $(`<div id="html_f421230f491a555f4b2226b45b5fa336" style="width: 100.0%; height: 100.0%;">     <b>Canada</b><br>     Emissions: 4,442 Gg CH4/year<br>     Vulnerability: 68.4/100<br>     <br>     <i>Circle size = emissions (log scale)<br>     Circle color = vulnerability</i>     </div>`)[0];
+                popup_4781e1bf0f1fe29cba50391dba30fd80.setContent(html_f421230f491a555f4b2226b45b5fa336);
+            
+        
+
+        circle_marker_22ad8a1cf595cda888fc99d3a268ef90.bindPopup(popup_4781e1bf0f1fe29cba50391dba30fd80)
+        ;
+
+        
+    
+    
+            var circle_marker_03fde789cc323578edbfa9c6c4d1e694 = L.circleMarker(
+                [23.8859, 45.0792],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 28.18913198875795, "stroke": true, "weight": 2}
+            ).addTo(map_9815ed59460f8becd09b80fb1c6be3b4);
+        
+    
+        var popup_5cea64b71c27c668412ef9bf8bfa4965 = L.popup({"maxWidth": 250});
+
+        
+            
+                var html_43486918503590a0b6d082eb661a21f2 = $(`<div id="html_43486918503590a0b6d082eb661a21f2" style="width: 100.0%; height: 100.0%;">     <b>Saudi Arabia</b><br>     Emissions: 4,343 Gg CH4/year<br>     Vulnerability: 54.3/100<br>     <br>     <i>Circle size = emissions (log scale)<br>     Circle color = vulnerability</i>     </div>`)[0];
+                popup_5cea64b71c27c668412ef9bf8bfa4965.setContent(html_43486918503590a0b6d082eb661a21f2);
+            
+        
+
+        circle_marker_03fde789cc323578edbfa9c6c4d1e694.bindPopup(popup_5cea64b71c27c668412ef9bf8bfa4965)
+        ;
+
+        
+    
+    
+            var circle_marker_288cdb4e920cbe913a238e27b56de517 = L.circleMarker(
+                [38.9637, 35.2433],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 28.048841078254437, "stroke": true, "weight": 2}
+            ).addTo(map_9815ed59460f8becd09b80fb1c6be3b4);
+        
+    
+        var popup_d8ce54c3dba656f060523f9fb5fa8b5a = L.popup({"maxWidth": 250});
+
+        
+            
+                var html_436df16b0d19687107982d25a23efc63 = $(`<div id="html_436df16b0d19687107982d25a23efc63" style="width: 100.0%; height: 100.0%;">     <b>Turkey</b><br>     Emissions: 4,072 Gg CH4/year<br>     Vulnerability: 53.7/100<br>     <br>     <i>Circle size = emissions (log scale)<br>     Circle color = vulnerability</i>     </div>`)[0];
+                popup_d8ce54c3dba656f060523f9fb5fa8b5a.setContent(html_436df16b0d19687107982d25a23efc63);
+            
+        
+
+        circle_marker_288cdb4e920cbe913a238e27b56de517.bindPopup(popup_d8ce54c3dba656f060523f9fb5fa8b5a)
+        ;
+
+        
+    
+    
+            var circle_marker_81f226841bfa07ae984317fdffb5eafe = L.circleMarker(
+                [9.145, 40.4897],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 27.883783106942595, "stroke": true, "weight": 2}
+            ).addTo(map_9815ed59460f8becd09b80fb1c6be3b4);
+        
+    
+        var popup_5ca0eb7f5c3302a890b97f734d84c9eb = L.popup({"maxWidth": 250});
+
+        
+            
+                var html_e9cc544dfc5fe78e60958493c2ea53d9 = $(`<div id="html_e9cc544dfc5fe78e60958493c2ea53d9" style="width: 100.0%; height: 100.0%;">     <b>Ethiopia</b><br>     Emissions: 3,774 Gg CH4/year<br>     Vulnerability: 38.4/100<br>     <br>     <i>Circle size = emissions (log scale)<br>     Circle color = vulnerability</i>     </div>`)[0];
+                popup_5ca0eb7f5c3302a890b97f734d84c9eb.setContent(html_e9cc544dfc5fe78e60958493c2ea53d9);
+            
+        
+
+        circle_marker_81f226841bfa07ae984317fdffb5eafe.bindPopup(popup_5ca0eb7f5c3302a890b97f734d84c9eb)
+        ;
+
+        
+    
+</script>
+</html>
