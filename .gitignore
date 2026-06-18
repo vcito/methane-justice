@@ -216,3 +216,20 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+# Large data files
+*.nc
+*.xls
+*.xlsx
+*.zip
+
+# Data folders
+data/edgar_extracted/
+data/edgar/
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Environment
+venv/
